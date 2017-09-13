@@ -2,12 +2,12 @@ name:                Octopus
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/githubuser/Octopus#readme
+homepage:            https://github.com/MxmUrw/Octopus#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Author name here
+author:              Maxim Urschumzew
 maintainer:          example@example.com
-copyright:           2017 Author name here
+copyright:           2017 Maxim Urschumzew
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
@@ -16,8 +16,11 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      Common
   exposed-modules:     A_Infrastructure
+  other-modules:       A1_CLI
+                     , A2_Configuration
   build-depends:       base >= 4.7 && < 5
                      , dhall
+                     , optparse-applicative
   default-language:    Haskell2010
   default-extensions:  OverloadedStrings
                      , DeriveGeneric
@@ -43,4 +46,4 @@ test-suite Octopus-test
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/Octopus
+  location: https://github.com/MxmUrw/Octopus
