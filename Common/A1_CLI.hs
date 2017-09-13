@@ -1,7 +1,7 @@
 
 module A1_CLI
   (
-      parseCommands
+      parseCommands, Command(..)
   )
   where
 

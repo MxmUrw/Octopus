@@ -1,7 +1,11 @@
 
 module A2_Configuration
   (
-      readLocal
+      readLocal,
+      Config(..),
+      Item(..),
+      StorageLocation(..),
+      Vector(..)
   )
   where
 

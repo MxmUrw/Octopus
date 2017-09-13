@@ -18,16 +18,22 @@ library
   exposed-modules:     A_Infrastructure
   other-modules:       A1_CLI
                      , A2_Configuration
+                     , B_Status
   build-depends:       base >= 4.7 && < 5
                      , dhall
                      , optparse-applicative
+                     , cryptonite
+                     , filemanip
+                     , time
+                     , directory
+                     , text
   default-language:    Haskell2010
   default-extensions:  OverloadedStrings
                      , DeriveGeneric
                      , DuplicateRecordFields
 
 
-executable Octopus
+executable octo
   hs-source-dirs:      App
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
