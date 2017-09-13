@@ -5,45 +5,20 @@ module A_Infrastructure
   )
   where
 
----  Imports  ---
-import Dhall
-
-
-
----  Data  ---
-data StorageLocation = StorageLocation
-  {
-      path :: Text,
-      encryption_key :: Maybe Text
-  }
-  deriving (Generic, Show)
-instance Interpret StorageLocation
-
-
-data Item = Item
-  {
-      path :: Text,
-      targets :: Vector StorageLocation
-  }
-  deriving (Generic, Show)
-instance Interpret Item
-
-
-data Config = Config
-  {
-      roots :: Vector Text,
-      items :: Vector Item
-  }
-  deriving (Generic, Show)
-instance Interpret Config
+--- Imports ---
+import qualified A1_CLI as CLI
+import qualified A2_Configuration as Configuration
 
 
 
 run :: IO ()
 run =
   do
-      x <- input auto "./config"
-      print (x :: Config)
+      putStrLn "--- Args ---"
+      (putStrLn . show) =<< CLI.parseCommands
+      putStrLn "--- Config ---"
+      x <- Configuration.readLocal
+      print x
       putStrLn "Done"
 
 
