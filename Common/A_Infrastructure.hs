@@ -10,15 +10,15 @@ import Data.Text.Lazy
 import Control.Monad
 
 import qualified A1_CLI as CLI
-import qualified A2_Configuration as A2
-import qualified B_Status as B
+import qualified A2_Configuration as CONF
+import qualified B_Status as STAT
 
 
 
 run :: IO ()
 run =
   do
-      conf <- A2.readLocal
+      conf <- CONF.readLocal
 
       cmd <- CLI.parseCommands
       case cmd of
@@ -29,14 +29,28 @@ run =
 
 
 
-status :: A2.Config -> IO ()
+data ItemBinding = ItemBinding
+  {
+      getPathOfItemBinding :: FilePath
+  }
+instance STAT.Item ItemBinding where
+    getPath = getPathOfItemBinding
+    getShortName = getPathOfItemBinding
+
+
+status :: CONF.Config -> IO ()
 status conf =
   do
       putStrLn "--- Status ---"
-      mapM_ (putStrLn <=< fmap B.showTime . B.lastChange) (getItems conf)
+      mapM_ printItem (CONF.items conf)
   where
-      getItems :: A2.Config -> A2.Vector String
-      getItems = fmap unpack . fmap (A2.path :: A2.Item -> Text) . A2.items
+
+      printItem :: CONF.Item -> IO ()
+      printItem a =
+        do
+            mapM_ (putStrLn <=< STAT.showStatus <=< STAT.getStatus (ItemBinding $ CONF.pathOfItem a))
+                  (ItemBinding <$> CONF.pathOfStorageLocation <$> CONF.targets a)
+            putStrLn "\n"
 
 
 

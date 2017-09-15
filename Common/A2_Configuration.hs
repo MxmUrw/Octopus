@@ -5,11 +5,14 @@ module A2_Configuration
       Config(..),
       Item(..),
       StorageLocation(..),
-      Vector(..)
+      Vector(..),
+      pathOfItem,
+      pathOfStorageLocation
   )
   where
 
 --- Imports ---
+import Data.Text.Lazy as T
 import Dhall
 
 
@@ -39,6 +42,12 @@ data Config = Config
   }
   deriving (Generic, Show)
 instance Interpret Config
+
+pathOfItem :: Item -> FilePath
+pathOfItem = T.unpack . (path :: Item -> Text)
+
+pathOfStorageLocation :: StorageLocation -> FilePath
+pathOfStorageLocation = T.unpack . (path :: StorageLocation -> Text)
 
 
 --- Functions ---

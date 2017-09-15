@@ -31,6 +31,7 @@ library
   default-extensions:  OverloadedStrings
                      , DeriveGeneric
                      , DuplicateRecordFields
+                     , TypeSynonymInstances
 
 
 executable octo
